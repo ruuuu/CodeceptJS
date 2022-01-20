@@ -1,0 +1,22 @@
+stages:
+    - test
+    - info
+
+tests:
+  stage: test
+  tags:
+    - docker
+  image:
+    name: mcr.microsoft.com/playwright:focal
+  before_script:
+    - npm install
+  script:
+    - npm run codeceptjs
+  allow_failure: true
+  artifacts:
+    when: always
+    paths:
+      - ./output
+      - ls
+    expire_in: 2 week
+
